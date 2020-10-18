@@ -10,7 +10,15 @@ type User {
 }
 
 type Query {
-  hello: String!
-  getNumber: Float!
   getAllUsers: [User!]!
+}
+
+type Mutation {
+  createUser(user: CreateUser!): User!
+}
+
+input CreateUser {
+  name: String!
+  age: Float!
+  gender: String!
 }
