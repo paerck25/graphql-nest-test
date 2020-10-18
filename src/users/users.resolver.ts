@@ -1,8 +1,12 @@
 import { Resolver, Query } from '@nestjs/graphql';
-import { User } from './entity/user.entities';
+import { User } from './entity/User';
+import { UsersService } from './users.service';
 
 @Resolver()
 export class UsersResolver {
+
+    constructor(private readonly usersService: UsersService) { }
+
     @Query(() => String)
     async hello() {
         return 'hello';
@@ -14,19 +18,6 @@ export class UsersResolver {
 
     @Query(() => [User])
     async getAllUsers() {
-        return [
-            {
-                id: 1,
-                name: 'kdj',
-                age: 27,
-                gender: 'male'
-            },
-            {
-                id: 2,
-                name: 'jsy',
-                age: 25,
-                gender: 'female'
-            }
-        ]
+        return this.usersService.getAllUsers();
     }
 }
